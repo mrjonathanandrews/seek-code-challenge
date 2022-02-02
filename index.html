@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Seek Code Challenge</title>
+        <meta charset="utf-8" />
+        <meta name="description" content="This is a site that uses three.js to load and render a glTF model. Also included is a method of switching the render to a different glTF model. If you like what you see, consider hiring the author of this site, please and thank you!" />
+        <meta name="keywords" content="Seek, three.js, 3.js, glTF" />
+        <meta name="author" content="Jonathan Andrews" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    </head>
+
+    <body>
+
+        <script src="js/three.js"></script>
+        <script>
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial( { color: 0x00FF00 } );
+            const cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );
+            
+            camera.position.z = 5;
+
+            function animate() {
+                requestAnimationFrame( animate );
+
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+
+                renderer.render( scene, camera );
+            }
+
+            animate();
+        </script>
+    </body>
+
+</html>
