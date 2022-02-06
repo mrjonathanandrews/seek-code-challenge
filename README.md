@@ -1,2 +1,2 @@
 # seek-code-challenge
- This page uses three.js to load and render glTF models in a Slick gallery.
+ This page uses three.js to load and render two glTF models with a button that toggles between them.
