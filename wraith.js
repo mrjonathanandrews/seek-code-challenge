@@ -4,7 +4,7 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.137.5/examples/jsm/loaders
 const canvas = document.getElementById('wraith-scene-container');
 
 const scene = new THREE.Scene();
-scene.background= new THREE.Color(0x91929e);
+// scene.background= new THREE.Color(0x91929e);
 
 const loader = new GLTFLoader();
 loader.load('wraith-gltf/wraith.gltf', function(gltf) {
@@ -31,9 +31,11 @@ camera.position.set(0,1,2);
 scene.add(camera);
 
 const renderer = new THREE.WebGL1Renderer({
+    alpha: true,
     canvas: canvas
 });
 
+renderer.setClearColor( 0x000000, 0 );
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
