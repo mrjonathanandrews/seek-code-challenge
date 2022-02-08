@@ -1,16 +1,22 @@
 import * as THREE from 'https://unpkg.com/three@0.137.5/build/three.module.js';
 import { GLTFLoader } from 'https://unpkg.com/three@0.137.5/examples/jsm/loaders/GLTFLoader.js?module';
+import { OrbitControls } from 'https://unpkg.com/three@0.137.5/examples/jsm/controls/OrbitControls.js?module';
 
 const canvas = document.getElementById('wraith-scene-container');
 
 const scene = new THREE.Scene();
-// scene.background= new THREE.Color(0x91929e);
 
 const loader = new GLTFLoader();
+
 loader.load('wraith-gltf/wraith.gltf', function(gltf) {
+
+    gltf.scene.position.x = 0; 
+    gltf.scene.position.y = -1;
+    gltf.scene.position.z = 0;
+
     const root = gltf.scene;
     scene.add(root);
-    root.scale.set(0.025,0.025,0.025);
+    root.scale.set(0.0275,0.0275,0.0275);
 }, function(xhr) {
     console.log((xhr.loaded/xhr.total * 100) + "% loaded")
 }, undefined, function (error) {
@@ -19,7 +25,31 @@ loader.load('wraith-gltf/wraith.gltf', function(gltf) {
 
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(2,2,5);
+light.target.position.set(0, 0, 0)
+
 scene.add(light);
+scene.add(light.target);
+
+const light2 = new THREE.DirectionalLight(0xffffff, 1);
+light2.position.set(-2,2,5);
+light2.target.position.set(0, 0, 0)
+
+scene.add(light2);
+scene.add(light2.target);
+
+const light3 = new THREE.DirectionalLight(0xffffff, 1);
+light3.position.set(-2,2,-5);
+light3.target.position.set(0, 0, 0)
+
+scene.add(light3);
+scene.add(light3.target);
+
+const light4 = new THREE.DirectionalLight(0xffffff, 1);
+light4.position.set(2 ,2,-5);
+light4.target.position.set(0, 0, 0)
+
+scene.add(light4);
+scene.add(light4.target);
 
 const sizes = {
     width: 0.625 * window.innerWidth,
@@ -34,6 +64,9 @@ const renderer = new THREE.WebGL1Renderer({
     alpha: true,
     canvas: canvas
 });
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.update();
 
 renderer.setClearColor( 0x000000, 0 );
 renderer.setSize(sizes.width, sizes.height);
